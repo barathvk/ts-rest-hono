@@ -294,14 +294,12 @@ const transformAppRouteMutationImplementation = ({
 
       return c.json(result.body, statusCode);
     } catch (e) {
-      console.log(
-        `[ts-rest] error processing handler for: ${route.name}, path: ${schema.path}`
-      );
-      console.error(e);
-
-      options.errorHandler?.(e, c);
-
-      return next();
+      if (options.errorHandler) {
+        options.errorHandler.(e, c);
+      }
+      else {
+        throw e
+      }
     }
   };
 
