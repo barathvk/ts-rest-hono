@@ -295,7 +295,7 @@ const transformAppRouteMutationImplementation = ({
       return c.json(result.body, statusCode);
     } catch (e) {
       if (options.errorHandler) {
-        options.errorHandler.(e, c);
+        options.errorHandler(e, c);
       }
       else {
         throw e
